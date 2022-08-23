@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Home: View {
-    @State private var selectedData: ImageData = imageData[0]
+    @State private var activeImage: ImageData = imageData[0]
     
     var body: some View {
         ZStack {
@@ -17,12 +17,12 @@ struct Home: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea()
-                    .opacity(data.id == selectedData.id ? 1 : 0)
+                    .opacity(data.id == activeImage.id ? 1 : 0)
                     .blur(radius: 25, opaque: true)
-                    .animation(.easeIn, value: selectedData)
+                    .animation(.easeIn, value: activeImage)
             }
             
-            TabView(selection: $selectedData) {
+            TabView(selection: $activeImage) {
                 ForEach(imageData) { data in
                     Image(data.name)
                         .resizable()
